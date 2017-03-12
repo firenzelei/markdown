@@ -1,4 +1,9 @@
 #!/bin/sh
+
+# yum -y install wget && cd /tmp/ && wget https://raw.githubusercontent.com/firenzelei/markdown/master/init.sh && sh init.sh >> /tmp/init.sh 2>&1
+# 语言
+echo "export LC_ALL=en_US.UTF-8"  >>  /etc/profile
+source /etc/profile
 rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
 rpm -Uvh https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-4.noarch.rpm
@@ -9,7 +14,7 @@ yum -y install ack screen wget curl zip unzip ntpdate
 yum -y install net-snmp net-snmp-devel net-snmp-utils vim git bind-utils
 yum -y install tar nc htop iotop iftop telnet wget curl curl-devel
 yum -y remove mysql-server mysql httpd
-yum -y install nginx nginx-module-geoip Percona-Server-server-55 percona-xtrabackup-24
+yum -y install nginx nginx-module-geoip
 yum -y install libwebp-devel libwebp-tools ImageMagick ImageMagick-devel 
 yum -y install yum-utils
 yum-complete-transaction
@@ -81,10 +86,10 @@ git config --global alias.cm commit
 
 
 # salt   安装saltStrack
-sudo yum install https://repo.saltstack.com/yum/redhat/salt-repo-latest-1.el7.noarch.rpm -y
-sudo yum clean expire-cache
-sudo yum install salt-master -y    
-sudo yum install salt-minion -y    
+yum install https://repo.saltstack.com/yum/redhat/salt-repo-latest-1.el7.noarch.rpm -y
+yum clean expire-cache
+yum install salt-master -y
+yum install salt-minion -y
 
 
 echo "master: pg01" >> /etc/salt/minion
@@ -94,10 +99,12 @@ salt-key -A -y
 salt-key -L
 salt '*' cmd.run "cd / && ls"
 
-
+//其他的一些yum安装 crontab
+yum install -y vixie-cron
 
 # 邮件服务安装postfix
 yum -y install mailx postfix
 service postfix start
+chkconfig postfix on
 echo "123" | mail -s "邮件服务安装完毕" "zhanglei@nutsmobi.com"
 
