@@ -32,8 +32,9 @@ service php-fpm restart
 
 
 # mysql 5.7
-rpm     -Uvh    http://dev.mysql.com/get/mysql57-community-release-el6-8.noarch.rpm
+rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el6-8.noarch.rpm
 yum -y install mysql-community-server
+service mysqld start
 
 
 
@@ -79,9 +80,7 @@ git config --global alias.cm commit
 
 
 
-# salt
-1, 安装saltStrack
-yum 安装
+# salt   安装saltStrack
 sudo yum install https://repo.saltstack.com/yum/redhat/salt-repo-latest-1.el7.noarch.rpm -y
 sudo yum clean expire-cache
 sudo yum install salt-master -y    
@@ -90,8 +89,8 @@ sudo yum install salt-minion -y
 
 echo "master: pg01" >> /etc/salt/minion
 service salt-minion restart && service salt-master restart
-salt-key -L # 查看列表
-salt-key -A -y   # 添加minion
+salt-key -L
+salt-key -A -y
 salt-key -L
 salt '*' cmd.run "cd / && ls"
 
