@@ -24,8 +24,8 @@ yum -y install sudo
 # libmcrypt
 # rpm -Uvh http://mirrors.hust.edu.cn/epel//5/x86_64/epel-release-5-4.noarch.rpm
 # yum -y install libmcrypt libmcrypt-devel mcrypt mhash
-
 yum -y install php71w php71w-fpm php71w-common php71w-cli php71w-devel php71w-intl php71w-mysqlnd php71w-pdo php71w-soap php71w-tidy php71w-xml php71w-xmlrpc php71w-zts php71w-gd php71w-mbstring php71w-mcrypt php71w-pecl-zendopcache php71w-pear php71w-posix php71w-mysqlnd php71w-pecl-redis
+chkconfig --level 2345 php-fpm on
 
 # Yar安装
 yum -y install curl-devel
@@ -47,16 +47,19 @@ service mysqld start
 echo "ZONE=Asia/Shanghai" > /etc/sysconfig/clock
 rm -f  /etc/localtime 
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-
+#修改时间
+# date -s "2017-03-23 14:31:00"
+# clock -w
 
 #### 安装redis
-mkdir -p /opt/data/redis/6379
+mkdir -p /etc/redis
+cd /usr/local
 wget http://download.redis.io/releases/redis-stable.tar.gz
 tar xzf redis-stable.tar.gz
 cd redis-stable
 cd src && make && make install
 cd ../ && sh utils/install_server.sh
-/bin/cp -f /opt/nfs.localdomain/env/6379.conf /etc/redis/6379.conf
+/bin/cp -f redis.conf /etc/redis/6379.conf
 service redis_6379 restart
 
 ####安装 composer
@@ -75,14 +78,17 @@ javac -version
 
 # git 自动补全,设置别名
 wget -O ~/.git-completion.bash https://raw.githubusercontent.com/git/git/3bc53220cb2dcf709f7a027a3f526befd021d858/contrib/completion/git-completion.bash 
-echo "" > ~/.bashrc && echo "source ~/.git-completion.bash" >> ~/.bashrc
+echo "" >> ~/.bashrc && echo "source ~/.git-completion.bash" >> ~/.bashrc
 source ~/.git-completion.bash
-
 
 git config --global alias.st status
 git config --global alias.br branch
 git config --global alias.cm commit
 
+# git-lfs安装 处理大文件使用
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash -
+yum makecache
+yum install -y git-lfs
 
 
 # salt   安装saltStrack
@@ -107,4 +113,21 @@ yum -y install mailx postfix
 service postfix start
 chkconfig postfix on
 echo "123" | mail -s "邮件服务安装完毕" "zhanglei@nutsmobi.com"
+
+
+
+# 修改limit -n
+$aa = "";
+vi /etc/security/limits.conf
+# End of file
+* soft nofile 65536
+
+* hard nofile 131072
+
+* soft nproc 2048
+
+* hard nproc 4096
+
+sysctl -p
+
 
