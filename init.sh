@@ -40,8 +40,10 @@ service php-fpm restart
 rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el6-8.noarch.rpm
 yum -y install mysql-community-server
 service mysqld start
-
-
+# 此时需要使用临时密码登录
+# ps -ef | grep error=  
+# cat /var/log/mysqld.log | grep "temporary password"  # 获取临时密码
+# 修改密码ALTER USER 'root'@'localhost' IDENTIFIED BY '***'; FLUSH PRIVILEGES;
 
 # 更换时区
 echo "ZONE=Asia/Shanghai" > /etc/sysconfig/clock
@@ -97,7 +99,7 @@ yum clean expire-cache
 yum install salt-master -y
 yum install salt-minion -y
 
-
+# 只需配置一下即可生效, master: 后面的空格不可丢
 echo "master: pg01" >> /etc/salt/minion
 service salt-minion restart && service salt-master restart
 salt-key -L
@@ -131,3 +133,5 @@ vi /etc/security/limits.conf
 sysctl -p
 
 
+代码部署
+su -m nobody "composer update"
