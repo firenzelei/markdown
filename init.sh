@@ -2,6 +2,8 @@
 
 # yum -y install wget && cd /tmp/ && wget https://raw.githubusercontent.com/firenzelei/markdown/master/init.sh && sh init.sh >> /tmp/init.sh 2>&1
 # 语言
+yum groupinstall chinese-support
+#vim /etc/sysconfig/i18n   LANG="zh_CN.UTF-8"
 echo "export LC_ALL=en_US.UTF-8"  >>  /etc/profile
 source /etc/profile
 rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
