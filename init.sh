@@ -21,6 +21,7 @@ yum -y install libwebp-devel libwebp-tools ImageMagick ImageMagick-devel
 yum -y install yum-utils
 yum-complete-transaction
 yum -y install sudo
+service nginx start
 
 
 # libmcrypt
@@ -89,9 +90,9 @@ git config --global alias.br branch
 git config --global alias.cm commit
 
 # git-lfs安装 处理大文件使用
-curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash -
-yum makecache
-yum install -y git-lfs
+#curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash -
+#yum makecache
+#yum install -y git-lfs
 
 
 # salt   安装saltStrack
@@ -116,23 +117,24 @@ yum -y install mailx postfix
 service postfix start
 chkconfig postfix on
 echo "123" | mail -s "邮件服务安装完毕" "zhanglei@nutsmobi.com"
+# 如果提示  inet_protocols: configuring for IPv4 support only
+# 那么  vim /etc/postfix/main.cf 修改  inet_protocols = ipv4
 
 
 
 # 修改limit -n
-$aa = "";
-vi /etc/security/limits.conf
-# End of file
-* soft nofile 65536
-
-* hard nofile 131072
-
-* soft nproc 2048
-
-* hard nproc 4096
+#vi /etc/security/limits.conf
+## End of file
+#* soft nofile 65536
+#* hard nofile 131072
+#* soft nproc 2048
+#* hard nproc 4096
 
 sysctl -p
 
 
 代码部署
+mkdir -p /wwwroot
+cd /wwwroot/
+git clone git@github.com:firenzelei/wordpress.git
 su -m nobody "composer update"
