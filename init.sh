@@ -2,7 +2,7 @@
 
 # yum -y install wget && cd /tmp/ && wget https://raw.githubusercontent.com/firenzelei/markdown/master/init.sh && sh init.sh >> /tmp/init.sh 2>&1
 # 语言
-yum groupinstall chinese-support
+yum groupinstall chinese-support -y
 #vim /etc/sysconfig/i18n   LANG="zh_CN.UTF-8"
 echo "export LC_ALL=en_US.UTF-8"  >>  /etc/profile
 source /etc/profile
@@ -28,6 +28,7 @@ yum -y install sudo
 # yum -y install libmcrypt libmcrypt-devel mcrypt mhash
 yum -y install php71w php71w-fpm php71w-common php71w-cli php71w-devel php71w-intl php71w-mysqlnd php71w-pdo php71w-soap php71w-tidy php71w-xml php71w-xmlrpc php71w-zts php71w-gd php71w-mbstring php71w-mcrypt php71w-pecl-zendopcache php71w-pear php71w-posix php71w-mysqlnd php71w-pecl-redis
 chkconfig --level 2345 php-fpm on
+service php-fpm start
 
 # Yar安装
 yum -y install curl-devel
@@ -37,7 +38,6 @@ pecl install yar-2.0.1
 cd /etc/php.d  && echo "extension=msgpack.so" > msgpack.ini && echo "extension=yar.so" > yar.ini
 service php-fpm restart
 
-
 # mysql 5.7
 rpm -Uvh http://dev.mysql.com/get/mysql57-community-release-el6-8.noarch.rpm
 yum -y install mysql-community-server
@@ -45,6 +45,7 @@ service mysqld start
 # 此时需要使用临时密码登录
 # ps -ef | grep error=  
 # cat /var/log/mysqld.log | grep "temporary password"  # 获取临时密码
+# set global validate_password_policy=0;  # 否则会报错 Your password does not satisfy the current policy requirements
 # 修改密码ALTER USER 'root'@'localhost' IDENTIFIED BY '***'; FLUSH PRIVILEGES;
 
 # 更换时区
@@ -72,12 +73,10 @@ mv composer.phar /usr/local/bin/composer
 
 
 #### 安装java
-curl -L -O -H "Cookie: oraclelicense=accept-securebackup-cookie" -k "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm"
-rpm -ivh jdk-8u45-linux-x64.rpm
+cd /tmp
+wget  -O java.rpm http://javadl.oracle.com/webapps/download/AutoDL?BundleId=227541_e758a0de34e24606bca991d704f6dcbf -o java.rpm
+rpm -ivh java.rpm
 javac -version
-
-
-
 
 
 # git 自动补全,设置别名
