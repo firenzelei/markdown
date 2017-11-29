@@ -119,7 +119,11 @@ chkconfig postfix on
 echo "123" | mail -s "邮件服务安装完毕" "zhanglei@nutsmobi.com"
 # 如果提示  inet_protocols: configuring for IPv4 support only
 # 那么  vim /etc/postfix/main.cf 修改  inet_protocols = ipv4
+# 部分云服务器需要申请解封25端口，比如阿里云就是默认禁用的，需要申请解封。JD云默认打开
 
+# 修改防火窗策略  vim  /etc/sysconfig/iptables  &&   service iptables restart
+# -A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+# -A INPUT -p tcp -m state --state NEW -m tcp --dport 80 -j ACCEPT
 
 
 # 修改limit -n
