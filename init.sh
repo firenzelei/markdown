@@ -48,6 +48,8 @@ service mysqld start
 # cat /var/log/mysqld.log | grep "temporary password"  # 获取临时密码
 # set global validate_password_policy=0;  # 否则会报错 Your password does not satisfy the current policy requirements
 # 修改密码ALTER USER 'root'@'localhost' IDENTIFIED BY '***'; FLUSH PRIVILEGES;
+# 外网访问 
+#use mysql; update user set `Host` = '%' where `User`='root';FLUSH PRIVILEGES;
 
 # 更换时区
 echo "ZONE=Asia/Shanghai" > /etc/sysconfig/clock
