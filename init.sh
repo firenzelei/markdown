@@ -35,8 +35,12 @@ service php-fpm start
 yum -y install curl-devel
 pecl install msgpack-2.0.2
 pecl install yar-2.0.1
-
 cd /etc/php.d  && echo "extension=msgpack.so" > msgpack.ini && echo "extension=yar.so" > yar.ini
+
+# Swoole安装
+pecl install swoole
+cd /etc/php.d  && echo "extension=swoole.so" > swoole.ini
+
 service php-fpm restart
 
 # mysql 5.7
