@@ -25,7 +25,7 @@ service nginx start
 
 
 # libmcrypt
-# rpm -Uvh http://mirrors.hust.edu.cn/epel//5/x86_64/epel-release-5-4.noarch.rpm
+# rpm -Uvh http://mirrors.hust.edu.cn/epel/6/x86_64/epel-release-6-8.noarch.rpm
 # yum -y install libmcrypt libmcrypt-devel mcrypt mhash
 yum -y install php71w php71w-fpm php71w-common php71w-cli php71w-devel php71w-intl php71w-mysqlnd php71w-pdo php71w-soap php71w-tidy php71w-xml php71w-xmlrpc php71w-zts php71w-gd php71w-mbstring php71w-mcrypt php71w-pecl-zendopcache php71w-pear php71w-posix php71w-mysqlnd php71w-pecl-redis
 chkconfig --level 2345 php-fpm on
