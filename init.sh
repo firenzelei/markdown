@@ -140,6 +140,11 @@ echo "123" | mail -s "邮件服务安装完毕" "zhanglei@nutsmobi.com"
 #* soft nproc 2048
 #* hard nproc 4096
 
+# 关闭 SElinux
+# vi /etc/sysconfig/selinux
+# SELINUX=disabled
+# 临时关闭  setenforce 0
+
 sysctl -p
 
 
