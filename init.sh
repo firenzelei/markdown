@@ -8,7 +8,7 @@ echo "export LC_ALL=en_US.UTF-8"  >>  /etc/profile
 source /etc/profile
 rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
-rpm -Uvh https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-4.noarch.rpm
+rpm -Uvh https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-6.noarch.rpm
 yum -y install epel-release
 yum -y install gcc gcc-c++ autoconf automake make
 yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel
