@@ -9,6 +9,8 @@ source /etc/profile
 rpm -Uvh http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm
 rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm
 rpm -Uvh https://www.percona.com/redir/downloads/percona-release/redhat/latest/percona-release-0.1-6.noarch.rpm
+//crontab
+yum install -y vixie-cron
 yum -y install epel-release
 yum -y install gcc gcc-c++ autoconf automake make
 yum -y install zlib zlib-devel openssl openssl-devel pcre pcre-devel
@@ -114,9 +116,6 @@ salt-key -L
 salt-key -A -y
 salt-key -L
 salt '*' cmd.run "cd / && ls"
-
-//其他的一些yum安装 crontab
-yum install -y vixie-cron
 
 # 邮件服务安装postfix
 yum -y install mailx postfix
