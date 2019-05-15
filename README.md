@@ -9,6 +9,4 @@ NO PAINS, NA GAINS.
 
 > firenzelei@163.com
 
-## 常联系
-### 常联系
-
+## 2019 New Start
