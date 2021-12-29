@@ -1,0 +1,30 @@
+# mysql5.7
+rpm -ivh https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+# 启动mysql
+yum install mysql-server
+systemctl start mysqld
+# 查看临时密码
+# grep 'temporary password' /var/log/mysqld.log
+
+# redis安装
+cd /opt
+wget https://download.redis.io/releases/redis-6.2.1.tar.gz
+tar xzf redis-6.2.1.tar.gz
+cd redis-6.2.1
+make
+cp src/redis-cli src/redis-server  /bin/
+# 启动redis
+redis-server & > /dev/null
+
+
+# php安装https://www.jianshu.com/p/1e23aba0a164
+
+yum install epel-release -y
+rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+yum -y remove php*
+yum -y install php72w php72w-cli php72w-fpm php72w-common php72w-devel php72w-embedded php72w-gd php72w-mbstring php72w-mysqlnd php72w-opcache php72w-pdo php72w-xml
+# php开机启动
+systemctl enable php-fpm
+
+
+yum install telnet
