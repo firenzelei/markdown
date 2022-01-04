@@ -1,3 +1,23 @@
+# service 安装
+yum install initscripts -y
+
+# ifconfig 安装
+yum install net-tools.x86_64 -y
+
+# ssh安装
+yum install openssh-server -y
+
+yum -y install wget
+yum install telnet -y
+
+# 配置yum源
+cd /etc/yum.repos.d/
+mv CentOS-Base.repo CentOS-Base.repo_bak
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum clean all
+
+yum makecache
+
 # mysql5.7
 rpm -ivh https://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
 # 启动mysql
