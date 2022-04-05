@@ -13,6 +13,12 @@ yum install net-tools.x86_64 -y
 # ssh安装
 yum install openssh-server -y
 
+# ssh错误日志
+# sshd -t
+
+# 生成密钥 ****
+ssh-keygen -A
+
 yum -y install wget
 yum install telnet -y
 
